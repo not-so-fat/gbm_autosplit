@@ -1,9 +1,19 @@
+from collections.abc import Callable
 import math
 import warnings
 
 import lightgbm
 
 from . import auto_split_logic
+
+
+def suppress_params_warnings(func: Callable) -> Callable:
+    def decorated_func(*args, **kwargs):
+        with warnings.catch_warnings():
+            warnings.filterwarnings(
+                "ignore", message="Found `early_stopping_rounds` in params. Will use it instead of argument")
+            return func(*args, **kwargs)
+    return decorated_func
 
 
 class LGBMClassifier(lightgbm.LGBMClassifier):
@@ -32,11 +42,9 @@ class LGBMClassifier(lightgbm.LGBMClassifier):
         self.ratio_min_child_samples = ratio_min_child_samples
         self.metric = metric
 
+    @suppress_params_warnings
     def call_parent_fit(self, x, y, **kwargs):
-        with warnings.catch_warnings():
-            warnings.filterwarnings(
-                "ignore", message="Found `early_stopping_rounds` in params. Will use it instead of argument")
-            return super(LGBMClassifier, self).fit(x, y, **kwargs)
+        return super(LGBMClassifier, self).fit(x, y, **kwargs)
 
     def fit(self, x, y, **kwargs):
         if self.early_stopping_rounds > 0:
@@ -45,7 +53,7 @@ class LGBMClassifier(lightgbm.LGBMClassifier):
         self._set_min_child_samples(x.shape[0])
         self.call_parent_fit(x, y, verbose=False, early_stopping_rounds=-1)
 
-    def _set_min_child_samples(self, sample_size):
+    def _set_min_child_samples(self, sample_size: int):
         if self.ratio_min_child_samples is not None:
             self.set_params(min_child_samples=int(math.ceil(sample_size * self.ratio_min_child_samples)))
 
@@ -72,11 +80,9 @@ class LGBMRegressor(lightgbm.LGBMRegressor):
             importance_type=importance_type
         )
 
+    @suppress_params_warnings
     def call_parent_fit(self, x, y, **kwargs):
-        with warnings.catch_warnings():
-            warnings.filterwarnings(
-                "ignore", message="Found `early_stopping_rounds` in params. Will use it instead of argument")
-            return super(LGBMRegressor, self).fit(x, y, **kwargs)
+        return super(LGBMRegressor, self).fit(x, y, **kwargs)
 
     def fit(self, x, y, **kwargs):
         if self.early_stopping_rounds > 0:
@@ -85,6 +91,6 @@ class LGBMRegressor(lightgbm.LGBMRegressor):
         self._set_min_child_samples(x.shape[0])
         self.call_parent_fit(x, y, verbose=False, early_stopping_rounds=-1)
 
-    def _set_min_child_samples(self, sample_size):
+    def _set_min_child_samples(self, sample_size: int):
         if self.ratio_min_child_samples is not None:
             self.set_params(min_child_samples=int(math.ceil(sample_size * self.ratio_min_child_samples)))

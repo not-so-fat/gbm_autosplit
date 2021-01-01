@@ -13,7 +13,7 @@ class XGBClassifier(xgboost.XGBClassifier):
                  colsample_bytree=None, gamma=None, gpu_id=None, interaction_constraints=None,
                  max_delta_step=None, min_child_weight=None, missing=None, monotone_constraints=None,
                  num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None, tree_method=None,
-                 validate_parameters=None, verbosity=None, n_estimators=None):
+                 validate_parameters=None, verbosity=None, n_estimators=None, use_label_encoder=False):
         self.max_n_estimators = max_n_estimators
         self.early_stopping_rounds = early_stopping_rounds
         self.ratio_training = ratio_training
@@ -27,7 +27,8 @@ class XGBClassifier(xgboost.XGBClassifier):
             interaction_constraints=interaction_constraints, max_delta_step=max_delta_step,
             min_child_weight=min_child_weight, missing=missing, monotone_constraints=monotone_constraints,
             num_parallel_tree=num_parallel_tree, random_state=random_state, reg_alpha=reg_alpha, reg_lambda=reg_lambda,
-            tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity
+            tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity,
+            use_label_encoder=use_label_encoder
         )
 
     def call_parent_fit(self, x, y, **kwargs):

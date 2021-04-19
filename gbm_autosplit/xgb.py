@@ -1,5 +1,6 @@
 import math
 
+import numpy
 import xgboost
 
 from . import auto_split_logic
@@ -11,14 +12,9 @@ class XGBClassifier(xgboost.XGBClassifier):
                  learning_rate=None, scale_pos_weight=None, subsample=None, colsample_bynode=None,
                  n_jobs=1, importance_type=None, base_score=None, booster=None, colsample_bylevel=None,
                  colsample_bytree=None, gamma=None, gpu_id=None, interaction_constraints=None,
-                 max_delta_step=None, min_child_weight=None, missing=None, monotone_constraints=None,
+                 max_delta_step=None, min_child_weight=None, missing=numpy.nan, monotone_constraints=None,
                  num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None, tree_method=None,
                  validate_parameters=None, verbosity=None, n_estimators=None, use_label_encoder=False):
-        self.max_n_estimators = max_n_estimators
-        self.early_stopping_rounds = early_stopping_rounds
-        self.ratio_training = ratio_training
-        self.ratio_min_child_weight = ratio_min_child_weight
-        self.metric = metric
         super(XGBClassifier, self).__init__(
             objective=objective, n_estimators=max_n_estimators, max_depth=max_depth, learning_rate=learning_rate,
             scale_pos_weight=scale_pos_weight, subsample=subsample, colsample_bynode=colsample_bynode, n_jobs=n_jobs,
@@ -30,6 +26,11 @@ class XGBClassifier(xgboost.XGBClassifier):
             tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity,
             use_label_encoder=use_label_encoder
         )
+        self.max_n_estimators = max_n_estimators
+        self.early_stopping_rounds = early_stopping_rounds
+        self.ratio_training = ratio_training
+        self.ratio_min_child_weight = ratio_min_child_weight
+        self.metric = metric
 
     def call_parent_fit(self, x, y, **kwargs):
         super(XGBClassifier, self).fit(x, y, **kwargs)
@@ -51,14 +52,9 @@ class XGBRegressor(xgboost.XGBRegressor):
                  early_stopping_rounds=100, max_depth=None, learning_rate=None, scale_pos_weight=None,
                  subsample=None, colsample_bynode=None, n_jobs=1, importance_type=None, objective=None, base_score=None,
                  booster=None, colsample_bylevel=None, colsample_bytree=None, gamma=None, gpu_id=None,
-                 interaction_constraints=None, max_delta_step=None, min_child_weight=None, missing=None,
+                 interaction_constraints=None, max_delta_step=None, min_child_weight=None, missing=numpy.nan,
                  monotone_constraints=None, num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None,
                  tree_method=None, validate_parameters=None, verbosity=None, n_estimators=None):
-        self.max_n_estimators = max_n_estimators
-        self.early_stopping_rounds = early_stopping_rounds
-        self.ratio_training = ratio_training
-        self.ratio_min_child_weight = ratio_min_child_weight
-        self.metric = metric
         super(XGBRegressor, self).__init__(
             n_estimators=max_n_estimators, max_depth=max_depth, learning_rate=learning_rate,
             scale_pos_weight=scale_pos_weight, subsample=subsample, colsample_bynode=colsample_bynode, n_jobs=n_jobs,
@@ -69,6 +65,11 @@ class XGBRegressor(xgboost.XGBRegressor):
             num_parallel_tree=num_parallel_tree, random_state=random_state, reg_alpha=reg_alpha, reg_lambda=reg_lambda,
             tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity
         )
+        self.max_n_estimators = max_n_estimators
+        self.early_stopping_rounds = early_stopping_rounds
+        self.ratio_training = ratio_training
+        self.ratio_min_child_weight = ratio_min_child_weight
+        self.metric = metric
 
     def call_parent_fit(self, x, y, **kwargs):
         super(XGBRegressor, self).fit(x, y, **kwargs)

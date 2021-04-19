@@ -9,12 +9,14 @@ class TestXGB(unittest.TestCase):
         x, y = utils.get_xy(100, True)
         model = xgb.XGBClassifier()
         model.fit(x, y)
+        model.predict(x)
         self.assertGreater(5000, model.get_num_boosting_rounds())
 
     def test_basic_flow_rg(self):
         x, y = utils.get_xy(100, False)
         model = xgb.XGBRegressor()
         model.fit(x, y)
+        model.predict(x)
         self.assertGreater(5000, model.get_num_boosting_rounds())
 
     def test_instance_attribute_cl(self):

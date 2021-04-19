@@ -66,10 +66,6 @@ class LGBMRegressor(lightgbm.LGBMRegressor):
                  min_child_weight=None, min_child_samples=None, subsample=None, subsample_freq=None,
                  colsample_bytree=None, reg_alpha=None, reg_lambda=None, random_state=None,
                  n_jobs=1, silent=None, importance_type="gain"):
-        self.max_n_estimators = max_n_estimators
-        self.ratio_training = ratio_training
-        self.ratio_min_child_samples = ratio_min_child_samples
-        self.metric = metric
         super(LGBMRegressor, self).__init__(
             boosting_type=boosting_type, n_estimators=max_n_estimators, early_stopping_rounds=early_stopping_rounds,
             num_leaves=num_leaves, max_depth=max_depth, learning_rate=learning_rate,
@@ -79,6 +75,10 @@ class LGBMRegressor(lightgbm.LGBMRegressor):
             reg_alpha=reg_alpha, reg_lambda=reg_lambda, random_state=random_state, n_jobs=n_jobs, silent=silent,
             importance_type=importance_type
         )
+        self.max_n_estimators = max_n_estimators
+        self.ratio_training = ratio_training
+        self.ratio_min_child_samples = ratio_min_child_samples
+        self.metric = metric
 
     @suppress_params_warnings
     def call_parent_fit(self, x, y, **kwargs):

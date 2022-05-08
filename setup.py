@@ -9,13 +9,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="gbm_autosplit",
-    version="0.0.6",
+    version="0.0.7",
     author="@not-so-fat",
     description="LightGBM/XGBoost interface which tunes n_estimator by splitting data, then refit with entire data",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/not-so-fat/gbm_autosplit",
-    packages=setuptools.find_packages(exclude=["*tests"]),
+    packages=setuptools.find_packages(exclude=["test*"]),
     install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -1,5 +1,7 @@
 import unittest
 
+from sklearn import base
+
 from gbm_autosplit import xgb
 from . import utils
 
@@ -30,3 +32,11 @@ class TestXGB(unittest.TestCase):
         instance_attribute_keys = model.__dict__.keys()
         get_params_keys = model.get_params().keys()
         self.assertSetEqual(set(get_params_keys) - set(instance_attribute_keys), set([]))
+
+    def test_clone_cl(self):
+        model = xgb.XGBClassifier()
+        base.clone(model)
+
+    def test_clone_rg(self):
+        model = xgb.XGBRegressor()
+        base.clone(model)

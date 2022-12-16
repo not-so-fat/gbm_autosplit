@@ -14,9 +14,9 @@ class XGBClassifier(xgboost.XGBClassifier):
                  colsample_bytree=None, gamma=None, gpu_id=None, interaction_constraints=None,
                  max_delta_step=None, min_child_weight=None, missing=numpy.nan, monotone_constraints=None,
                  num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None, tree_method=None,
-                 validate_parameters=None, verbosity=None, n_estimators=None, use_label_encoder=False,
+                 validate_parameters=None, verbosity=None, n_estimators=None,
                  callbacks=None, enable_categorical=False, grow_policy=None, max_bin=None,
-                 max_cat_to_onehot=None, max_leaves=None, predictor=None, sampling_method=None):
+                 max_cat_to_onehot=None, max_leaves=None, predictor=None, sampling_method=None, **kwargs):
         super(XGBClassifier, self).__init__(
             objective=objective, n_estimators=max_n_estimators, max_depth=max_depth, learning_rate=learning_rate,
             eval_metric=eval_metric,
@@ -27,9 +27,9 @@ class XGBClassifier(xgboost.XGBClassifier):
             min_child_weight=min_child_weight, missing=missing, monotone_constraints=monotone_constraints,
             num_parallel_tree=num_parallel_tree, random_state=random_state, reg_alpha=reg_alpha, reg_lambda=reg_lambda,
             tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity,
-            use_label_encoder=use_label_encoder, callbacks=callbacks, enable_categorical=enable_categorical,
+            callbacks=callbacks, enable_categorical=enable_categorical,
             grow_policy=grow_policy, max_bin=max_bin, max_cat_to_onehot=max_cat_to_onehot,
-            max_leaves=max_leaves, predictor=predictor, sampling_method=sampling_method
+            max_leaves=max_leaves, predictor=predictor, sampling_method=sampling_method, **kwargs
         )
         self.max_n_estimators = max_n_estimators
         self.early_stopping_rounds = early_stopping_rounds
@@ -60,7 +60,7 @@ class XGBRegressor(xgboost.XGBRegressor):
                  monotone_constraints=None, num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None,
                  tree_method=None, validate_parameters=None, verbosity=None, n_estimators=None, callbacks=None,
                  enable_categorical=False, grow_policy=None, max_bin=None, max_cat_to_onehot=None,
-                 max_leaves=None, predictor=None, sampling_method=None):
+                 max_leaves=None, predictor=None, sampling_method=None, **kwargs):
         super(XGBRegressor, self).__init__(
             n_estimators=max_n_estimators, max_depth=max_depth, learning_rate=learning_rate, eval_metric=eval_metric,
             scale_pos_weight=scale_pos_weight, subsample=subsample, colsample_bynode=colsample_bynode, n_jobs=n_jobs,
@@ -72,7 +72,7 @@ class XGBRegressor(xgboost.XGBRegressor):
             tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity, 
             callbacks=callbacks, enable_categorical=enable_categorical, grow_policy=grow_policy,
             max_bin=max_bin, max_cat_to_onehot=max_cat_to_onehot, max_leaves=max_leaves,
-            predictor=predictor, sampling_method=sampling_method
+            predictor=predictor, sampling_method=sampling_method, **kwargs
         )
         self.max_n_estimators = max_n_estimators
         self.early_stopping_rounds = early_stopping_rounds

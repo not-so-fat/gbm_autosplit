@@ -16,7 +16,10 @@ def tune_n_estimator(learner, x, y, **kwargs):
     learner_clone.call_parent_fit(
         xtr, ytr, eval_set=[(xva, yva)], **kwargs
     )
-    learner.set_params(n_estimators=utils.get_n_estimators(learner_clone))
+    n_estimators = utils.get_n_estimators(learner_clone)
+    if kwargs.get("init_model") is not None:
+        n_estimators -= kwargs["init_model"].n_estimators
+    learner.set_params(n_estimators=n_estimators)
     learner.set_params(early_stopping_rounds=None)
     if learner.n_estimators == learner.max_n_estimators:
         logger.warning("n_estimators reached max_n_estimators: {}".format(learner.n_estimators))

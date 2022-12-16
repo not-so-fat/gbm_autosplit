@@ -26,16 +26,15 @@ class LGBMClassifier(lightgbm.LGBMClassifier):
                  subsample_for_bin=None, objective=None, class_weight=None, min_split_gain=None,
                  min_child_weight=None, min_child_samples=None, subsample=None, subsample_freq=None,
                  colsample_bytree=None, reg_alpha=None, reg_lambda=None, random_state=None,
-                 n_jobs=1, importance_type="gain"):
-        # kwargs cannot be used for sklearn compatibility
+                 n_jobs=1, importance_type="gain", **kwargs):
         super(LGBMClassifier, self).__init__(
-            boosting_type=boosting_type, n_estimators=max_n_estimators, early_stopping_rounds=early_stopping_rounds,
-            num_leaves=num_leaves, max_depth=max_depth, learning_rate=learning_rate,
-            subsample_for_bin=subsample_for_bin, objective=objective, class_weight=class_weight,
+            boosting_type=boosting_type, num_leaves=num_leaves, max_depth=max_depth, learning_rate=learning_rate,
+            n_estimators=max_n_estimators, subsample_for_bin=subsample_for_bin, 
+            objective=objective, class_weight=class_weight,
             min_split_gain=min_split_gain, min_child_weight=min_child_weight, min_child_samples=min_child_samples,
             subsample=subsample, subsample_freq=subsample_freq, colsample_bytree=colsample_bytree,
             reg_alpha=reg_alpha, reg_lambda=reg_lambda, random_state=random_state, n_jobs=n_jobs, 
-            importance_type=importance_type
+            importance_type=importance_type, early_stopping_rounds=early_stopping_rounds, **kwargs
         )
         self.max_n_estimators = max_n_estimators
         self.ratio_training = ratio_training
@@ -65,15 +64,14 @@ class LGBMRegressor(lightgbm.LGBMRegressor):
                  subsample_for_bin=None, objective=None, min_split_gain=None,
                  min_child_weight=None, min_child_samples=None, subsample=None, subsample_freq=None,
                  colsample_bytree=None, reg_alpha=None, reg_lambda=None, random_state=None,
-                 n_jobs=1, importance_type="gain"):
+                 n_jobs=1, importance_type="gain", **kwargs):
         super(LGBMRegressor, self).__init__(
-            boosting_type=boosting_type, n_estimators=max_n_estimators, early_stopping_rounds=early_stopping_rounds,
-            num_leaves=num_leaves, max_depth=max_depth, learning_rate=learning_rate,
-            subsample_for_bin=subsample_for_bin, objective=objective,
+            boosting_type=boosting_type, num_leaves=num_leaves, max_depth=max_depth, learning_rate=learning_rate,
+            n_estimators=max_n_estimators, subsample_for_bin=subsample_for_bin, objective=objective,
             min_split_gain=min_split_gain, min_child_weight=min_child_weight, min_child_samples=min_child_samples,
             subsample=subsample, subsample_freq=subsample_freq, colsample_bytree=colsample_bytree,
             reg_alpha=reg_alpha, reg_lambda=reg_lambda, random_state=random_state, n_jobs=n_jobs,
-            importance_type=importance_type
+            importance_type=importance_type, early_stopping_rounds=early_stopping_rounds, **kwargs
         )
         self.max_n_estimators = max_n_estimators
         self.ratio_training = ratio_training

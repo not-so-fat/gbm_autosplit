@@ -11,25 +11,25 @@ class XGBClassifier(xgboost.XGBClassifier):
                  ratio_min_child_weight=None, early_stopping_rounds=100, max_depth=None,
                  learning_rate=None, scale_pos_weight=None, subsample=None, colsample_bynode=None,
                  n_jobs=1, importance_type=None, base_score=None, booster=None, colsample_bylevel=None,
-                 colsample_bytree=None, gamma=None, gpu_id=None, interaction_constraints=None,
+                 colsample_bytree=None, gamma=None, interaction_constraints=None,
                  max_delta_step=None, min_child_weight=None, missing=numpy.nan, monotone_constraints=None,
                  num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None, tree_method=None,
                  validate_parameters=None, verbosity=None, n_estimators=None,
                  callbacks=None, enable_categorical=False, grow_policy=None, max_bin=None,
-                 max_cat_to_onehot=None, max_leaves=None, predictor=None, sampling_method=None, **kwargs):
+                 max_cat_to_onehot=None, max_leaves=None, sampling_method=None, **kwargs):
         super(XGBClassifier, self).__init__(
             objective=objective, n_estimators=max_n_estimators, max_depth=max_depth, learning_rate=learning_rate,
-            eval_metric=eval_metric,
-            scale_pos_weight=scale_pos_weight, subsample=subsample, colsample_bynode=colsample_bynode, n_jobs=n_jobs,
+            eval_metric=eval_metric, scale_pos_weight=scale_pos_weight, subsample=subsample, 
+            colsample_bynode=colsample_bynode, n_jobs=n_jobs,
             importance_type=importance_type, base_score=base_score, booster=booster,
-            colsample_bylevel=colsample_bylevel, colsample_bytree=colsample_bytree, gamma=gamma, gpu_id=gpu_id,
+            colsample_bylevel=colsample_bylevel, colsample_bytree=colsample_bytree, gamma=gamma,
             interaction_constraints=interaction_constraints, max_delta_step=max_delta_step,
             min_child_weight=min_child_weight, missing=missing, monotone_constraints=monotone_constraints,
             num_parallel_tree=num_parallel_tree, random_state=random_state, reg_alpha=reg_alpha, reg_lambda=reg_lambda,
             tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity,
             callbacks=callbacks, enable_categorical=enable_categorical,
             grow_policy=grow_policy, max_bin=max_bin, max_cat_to_onehot=max_cat_to_onehot,
-            max_leaves=max_leaves, predictor=predictor, sampling_method=sampling_method, **kwargs
+            max_leaves=max_leaves, sampling_method=sampling_method, **kwargs
         )
         self.max_n_estimators = max_n_estimators
         self.early_stopping_rounds = early_stopping_rounds
@@ -55,24 +55,24 @@ class XGBRegressor(xgboost.XGBRegressor):
     def __init__(self, max_n_estimators=5000, ratio_training=0.8, eval_metric="rmse", ratio_min_child_weight=None,
                  early_stopping_rounds=100, max_depth=None, learning_rate=None, scale_pos_weight=None,
                  subsample=None, colsample_bynode=None, n_jobs=1, importance_type=None, objective=None, base_score=None,
-                 booster=None, colsample_bylevel=None, colsample_bytree=None, gamma=None, gpu_id=None,
+                 booster=None, colsample_bylevel=None, colsample_bytree=None, gamma=None,
                  interaction_constraints=None, max_delta_step=None, min_child_weight=None, missing=numpy.nan,
                  monotone_constraints=None, num_parallel_tree=None, random_state=None, reg_alpha=None, reg_lambda=None,
                  tree_method=None, validate_parameters=None, verbosity=None, n_estimators=None, callbacks=None,
                  enable_categorical=False, grow_policy=None, max_bin=None, max_cat_to_onehot=None,
-                 max_leaves=None, predictor=None, sampling_method=None, **kwargs):
+                 max_leaves=None, sampling_method=None, **kwargs):
         super(XGBRegressor, self).__init__(
             n_estimators=max_n_estimators, max_depth=max_depth, learning_rate=learning_rate, eval_metric=eval_metric,
             scale_pos_weight=scale_pos_weight, subsample=subsample, colsample_bynode=colsample_bynode, n_jobs=n_jobs,
             importance_type=importance_type, objective=objective, base_score=base_score, booster=booster,
-            colsample_bylevel=colsample_bylevel, colsample_bytree=colsample_bytree, gamma=gamma, gpu_id=gpu_id,
+            colsample_bylevel=colsample_bylevel, colsample_bytree=colsample_bytree, gamma=gamma,
             interaction_constraints=interaction_constraints, max_delta_step=max_delta_step,
             min_child_weight=min_child_weight, missing=missing, monotone_constraints=monotone_constraints,
             num_parallel_tree=num_parallel_tree, random_state=random_state, reg_alpha=reg_alpha, reg_lambda=reg_lambda,
             tree_method=tree_method, validate_parameters=validate_parameters, verbosity=verbosity, 
             callbacks=callbacks, enable_categorical=enable_categorical, grow_policy=grow_policy,
             max_bin=max_bin, max_cat_to_onehot=max_cat_to_onehot, max_leaves=max_leaves,
-            predictor=predictor, sampling_method=sampling_method, **kwargs
+            sampling_method=sampling_method, **kwargs
         )
         self.max_n_estimators = max_n_estimators
         self.early_stopping_rounds = early_stopping_rounds

@@ -9,10 +9,10 @@ because to use early stopping module requires two data sets but scikit learn doe
 
 ## Algorithm
 To solve this situation, this interface performs following steps with in `fit`.
-1. User instanciates Classifier / Regressor with additional hyper parameter `max_n_estimators` and `ratio_training`
+1. User instanciates Classifier / Regressor with additional hyper parameters `max_n_estimators`, `ratio_training`, and `eval_metric`.
 2. User calls `fit` with `x` and `y` as usual
     1. Randomly split sample `(x, y)` into training and validation as ratio of sample size of training = `ratio_training`, 
-    2. Call `fit` of original GBM, using early stopping with split training and validation with `n_estimators` = `max_n_estimators`
+    2. Call `fit` of original GBM, using early stopping with split training and validation for the metric `eval_metric` with `n_estimators` = `max_n_estimators`
     3. Get `best_n_estimators` as the number of trees of stopped model of step 2-2.
     4. Call `fit` of original GBM with entire `(x, y)` and `n_estimators` = `best_n_estimators` of step 2-3.
 

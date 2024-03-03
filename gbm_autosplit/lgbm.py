@@ -15,6 +15,17 @@ def suppress_params_warnings(func: Callable) -> Callable:
             return func(*args, **kwargs)
     return decorated_func
 
+"""
+NOTE: This approach sets all the parameters of the original LGBMClassifier/Regressor. 
+There is a risk of incompatibilities with future versions of LightGBM as parameter 
+names may change, however attempting to pass all the original parameters as `kwargs`
+is not feasible due to the design of the LightGBM sklearn interface, which adheres 
+to the sklearn principle of not storing any `kwargs` as parameters 
+https://scikit-learn.org/stable/developers/develop.html#instantiation.
+For further insights, the discussion in https://github.com/microsoft/LightGBM/issues/3758 is 
+helpful in understanding this limitation.
+"""
+
 
 class LGBMClassifier(lightgbm.LGBMClassifier):
     """
@@ -38,8 +49,8 @@ class LGBMClassifier(lightgbm.LGBMClassifier):
         )
         self.max_n_estimators = max_n_estimators
         self.ratio_training = ratio_training
-        self.ratio_min_child_samples = ratio_min_child_samples
         self.eval_metric = eval_metric
+        self.ratio_min_child_samples = ratio_min_child_samples
 
     @suppress_params_warnings
     def call_parent_fit(self, x, y, **kwargs):
